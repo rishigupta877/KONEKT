@@ -1,0 +1,122 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<!-- Coding by CodingLab | www.codinglabweb.com-->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Responsive Login and Signup Form </title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <!-- Boxicons CSS -->
+    <link href=' https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+
+</head>
+
+<body>
+    <div class="d-inline-block align-text-top logo-design">
+        <h4 class="heading-text">KONEKT</h4>
+        <!-- <svg width="221" height="124" viewBox="0 0 221 124" fill="none" xmlns="http://www.w3.org/2000/svg">
+        </svg> -->
+    </div>
+    <section class="container forms">
+        
+        <div class="form login">
+            <div class="form-content">
+                <header>Login</header>
+                <form action="accounts/login" method="POST">
+
+                    {% csrf_token %}
+                    <div class="field input-field">
+                        <input type="email"name="email" placeholder="Email" class="input">
+                    </div>
+
+                    <div class="field input-field">
+                        <input type="password" name="password" placeholder="Password" class="password">
+                        <i class='bx bx-hide eye-icon'></i>
+                    </div>
+
+                    <div class="form-link">
+                        <a href="#" class="forgot-pass">Forgot password?</a>
+                    </div>
+
+                    <div class="field button-field">
+                        <button type="submit">Login</button>
+                    </div>
+                </form>
+
+                <div class="form-link">
+                    <span>Don't have an account? <a href="{% url 'register' %}" class="link signup-link">Signup</a></span>
+                </div>
+            </div>
+
+            <div class="line"></div>
+
+
+            <div class="media-options">
+                <a href="#" class="field google">
+                    <img src="{% static 'images/google.png'%}" alt="" class="google-img">
+                    <span>Login with Google</span>
+                </a>
+            </div>
+
+        </div>
+        
+        <!-- Signup Form -->
+
+        <div class="form signup">
+            <div class="form-content">
+                <header>Signup</header>
+                <form action="accounts/register" method="post">
+
+                    {% csrf_token %}
+                    <div class="field input-field">
+                        <input type="username" name="username" placeholder="User Name" class="input">
+                    </div>
+
+                    <div class="field input-field">
+                        <input type="email" name="email" placeholder="Email" class="input">
+                    </div>
+
+                    <div class="field input-field">
+                        <input type="password" name="password1" placeholder="Create password" class="password">
+                    </div>
+
+                    <div class="field input-field">
+                        <input type="password" name="password2" placeholder="Confirm password" class="password">
+                        <i class='bx bx-hide eye-icon'></i>
+                    </div>
+
+                    <div class="field button-field">
+                        <button type="submit">Signup</button>
+                    </div>
+                </form>
+
+                <div class="form-link">
+                    <span>Already have an account? <a href="{% url 'login' %}" class="link login-link">Login</a></span>
+                </div>
+            </div>
+
+            <div class="line"></div>
+
+            <div class="media-options">
+                <a href="#" class="field google">
+                    <img src="{% static 'images/google.png'%}" alt="" class="google-img">
+                    <span>Login with Google</span>
+                </a>
+            </div>
+
+        </div>
+    </section>
+     
+    <!-- JavaScript -->
+    <script src="{% static 'js/script.js'%}"></script>
+</body>
+
+</html>
