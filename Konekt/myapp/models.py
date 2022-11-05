@@ -1,27 +1,26 @@
-from contextlib import nullcontext
-from unittest import TextTestRunner
+
 from django.db import models
-from django.contrib.auth.models import AbstractUser,User
+from django.contrib.auth.models import AbstractUser
+from .manage import UserManager
 # Create your models here.
 
+class User(AbstractUser):
+    username=models.CharField(max_length=45,null=True,blank=True)
+    name=models.CharField(max_length=200,null=True)
+    email=models.EmailField(unique=True)
+    bio=models.TextField(null=True)
+    #avatar=models.ImageField()
+   
+    USERNAME_FIELD='email'
+    object = UserManager()
+    REQUIRED_FIELDS=[]
+   
 
-
-# class User(AbstractUser):
-#     name=models.CharField(max_length=200,null=True)
-#     email=models.EmailField(unique=True)
-#     #bio=models.Field(null=True)
-#     #avatar=models.ImageField()
-#     #friends=models.ManyToManyField(User,related_name="Friends",on_delete=models.SET_NULL)
+    def __str__(self):
+        return str(self.email)
     
-#     # USERNAME_FIELD='email'
-#     REQUIRED_FIELDS=[]
-
-#     def __str__(self):
-#         return self.email
 
 
-class Friends(models.Model):
-    friends=models.ManyToManyField(User,related_name="friends",blank=True)
 
 
 class Posts(models.Model):
