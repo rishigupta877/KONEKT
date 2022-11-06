@@ -28,7 +28,9 @@ class Posts(models.Model):
    edited=models.DateTimeField(auto_now_add=True)
    tags=models.TextField(null=True,blank=True)
    userId=models.ForeignKey(User,on_delete=models.SET_NULL,null=True)
-
+   img=models.ImageField(upload_to='images',null=True,blank=True)
+   content=models.TextField(null=True,blank=True)
+   
    
 
 
@@ -54,6 +56,7 @@ class room(models.Model):
    postid=models.ForeignKey(Posts,on_delete=models.SET_NULL,null=True)
 
          
+
 
 
 

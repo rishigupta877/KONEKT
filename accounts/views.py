@@ -60,3 +60,12 @@ def loginUser(request):
             messages.error(request,'user does not exist') 
     context={ 'page' :login}     
     return redirect('home')
+
+
+
+
+
+def logoutUser(request):  
+    
+    logout(request)
+    return redirect('home')
