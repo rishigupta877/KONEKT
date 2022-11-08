@@ -8,9 +8,10 @@ urlpatterns=[
 
 
     path('',views.home,name="home"),
-
-
-
+    path('dashboard/<str:pk>/' ,views.dashboard,name="dashboard"),
+    path('createpost',views.createPost,name="createpost"),
+    path('delete_post/<str:pk>/',views.deletePost,name="delete"),
+    
 
 
 

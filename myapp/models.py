@@ -6,9 +6,9 @@ from .manage import UserManager
 
 class User(AbstractUser):
     username=models.CharField(max_length=45,null=True,blank=True)
-    name=models.CharField(max_length=200,null=True)
+    name=models.CharField(max_length=200,null=True,blank=True)
     email=models.EmailField(unique=True)
-    bio=models.TextField(null=True)
+    bio=models.TextField(null=True,blank=True)
     #avatar=models.ImageField()
    
     USERNAME_FIELD='email'
