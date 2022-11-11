@@ -27,16 +27,25 @@ class Posts(models.Model):
    posted=models.DateTimeField(auto_now=True)
    edited=models.DateTimeField(auto_now_add=True)
    tags=models.TextField(null=True,blank=True)
-   userId=models.ForeignKey(User,on_delete=models.SET_NULL,null=True)
+   userId=models.ForeignKey(User,on_delete=models.CASCADE)
    img=models.ImageField(upload_to='images',null=True,blank=True)
    content=models.TextField(null=True,blank=True)
+   
    
    
 
 
 class Like(models.Model):
-    postId=models.ForeignKey(Posts,on_delete=models.SET_NULL,null=True)
+    postId=models.ForeignKey(Posts,on_delete=models.CASCADE,null=True)
     userId=models.ForeignKey(User,on_delete=models.SET_NULL,null=True)
+
+
+
+class Dislike(models.Model):
+    postId=models.ForeignKey(Posts,on_delete=models.CASCADE,null=True)
+    userId=models.ForeignKey(User,on_delete=models.SET_NULL,null=True)
+
+
 
 
 
@@ -44,7 +53,7 @@ class comment(models.Model):
 
      comment_date=models.DateTimeField(auto_now=True);
      comment_edited=models.DateTimeField(auto_now_add=True)
-     postId=models.ForeignKey(Posts,on_delete=models.SET_NULL,null=True)
+     postId=models.ForeignKey(Posts,on_delete=models.CASCADE)
      userId=models.ForeignKey(User,on_delete=models.SET_NULL,null=True)
 
 

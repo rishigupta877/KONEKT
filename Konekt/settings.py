@@ -138,3 +138,15 @@ MEDIA_ROOT= BASE_DIR/'static/images'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOW_ALL_ORIGINS=True
+
+
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'  
+MAILER_EMAIL_BACKEND = EMAIL_BACKEND  
+EMAIL_HOST = 'smtp.gmail.com'  
+EMAIL_HOST_PASSWORD = 'sllugonkftglryrs'  
+EMAIL_HOST_USER = 'zgddht@gmail.com'  
+EMAIL_PORT = 465  
+EMAIL_USE_SSL = True  
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
