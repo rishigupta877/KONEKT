@@ -8,7 +8,7 @@ from django.contrib.auth.admin import UserAdmin
 
 admin.site.register(models.User)
 admin.site.register(models.comment)
-
+admin.site.register(models.Dislike)
 admin.site.register(models.Like)
 admin.site.register(models.Posts)
 admin.site.register(models.room)

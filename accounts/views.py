@@ -32,11 +32,15 @@ def registerUser(request):
         password2=request.POST['password2']
         if password1 == password2:
             if User.objects.filter(username=username,email=email).exists():
-                    user=User.objects.get(username__exact=username,email__exact=email)
-                    if user.is_active() == False:
+                    user=User.objects.get(username=username,email=email)
+                    print(user.is_active)
+                    if user.is_active:
+                        message.error(request,'your account is active you can login now')
+                    else :    
                         messages.error(request,'Verify your email')
-                    else :
-                        return redirect('login')    
+                    return redirect('login')    
+                    
+                       
             elif User.objects.filter(username=username).exists():
                 messages.error(request,'Username Taken')
                 

@@ -27,7 +27,7 @@
             <div class="form-content">
                 <header>New Post</header>
                 <form action=""  method="post" enctype="multipart/form-data">
-               {% csrf_token %}
+                     {% csrf_token %}
                     <div class="field input-field">
                         <p>
                             <label for="file" style="cursor: pointer">Upload</label>
@@ -39,12 +39,12 @@
                     </div>
                     <img id="output" width="100%" />
                     <div class="field input-field">
-                        <input  name=" tags" type="tags" placeholder="Tags" class="input" />
+                        <input  name="tags" type="tags" placeholder="Tags" class="input" />
 
                     </div>
 
                     <div class="field input-field">
-                        <input  name=" content" type="desc" placeholder="Description" class="input" />
+                        <input  name="content" type="desc" placeholder="Description" class="input" />
                     </div>
                 
 

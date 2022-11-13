@@ -95,14 +95,16 @@
         <div class="feed">
         <!-- post starts -->
              {% for post in posts %} 
-             {% if post.userId %} 
+             {% if post.userId %}
             <div class="post">
                  
                
                 {% include 'postmaterial.html' %}
                 {% include 'like_dislike.html' %}
             </div>
-            {% endif %}
+        
+            
+                        {% endif %}
             {% endfor %}
             <!-- posts end -->
         </div>

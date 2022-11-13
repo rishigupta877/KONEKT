@@ -24,4 +24,5 @@ class PostForm(ModelForm):
             'posted',
             'edited',
             'userId',
+            'likecount'
         ]      
