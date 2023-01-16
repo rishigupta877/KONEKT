@@ -25,28 +25,44 @@
         <div class="form login">
             <div class="form-content">
                 <header>New Group</header>
-                <form action="#">
-                    <div class="field input-field">
-                        <input type="GroupName" placeholder="Group Name" class="input" />
+                <form action="" method="POST" enctype="multipart/form-data">
 
-                    </div>
-
-                    <div class="field input-field">
-                        <input type="desc" placeholder="Describe the group" class="input" />
-                    </div>
+                    {% csrf_token %}
                     <div class="field input-field">
                         <p>
-                            <label for="file" style="cursor: pointer">Upload Group Profile</label>
+                            <label for="file" style="cursor: pointer">Group Profile</label>
                             <span class="material-symbols-outlined"> upload </span>
                         </p>
                         <input type="file" accept="image/gif, image/jpeg, image/png" name="image" id="file"
                             onchange="loadFile(event)" style="display: none" />
 
                     </div>
-                    <img id="output" width="100%" />
+                    <img id="output"   width="100%" />
+                    <div class="field input-field">
+                        <div>Group name</div>
+                        <input name="name" type="GroupName" placeholder="Group Name" class="input" />
 
+                    </div>
+
+                    <br>
+                    <div class="field input-field">
+                        <div>Description</div>
+                        <input name="description" type="desc" placeholder="Description" class="input" />
+                    </div>
+
+                     
+                    <div>
+                        <br>
+                     <label for="is_public">Is_public</label>
+                        <select name="is_public" class="field input_field" >
+                            
+                            <option  value="True" >True</option>
+                            <option  value="False" >False</option>
+                         
+                        </select>
+                    </div>
                     <div class="field button-field">
-                        <button>Create Post</button>
+                        <button>Create</button>
                     </div>
                 </form>
             </div>

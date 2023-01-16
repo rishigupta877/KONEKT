@@ -1,4 +1,4 @@
-
+{% load socialaccount %}
 {% load static %}
 
 <!DOCTYPE html>
@@ -60,7 +60,8 @@
 
 
             <div class="media-options">
-                <a href="#" class="field google">
+                <!-- <a href="{% provider_login_url 'google' %}" class="field google"> -->
+                    <a href="{% provider_login_url 'google' %}" class="field google">
                     <img src="{% static 'images/google.png'%}" alt="" class="google-img">
                     <span>Login with Google</span>
                 </a>
@@ -80,10 +81,14 @@
                         <input type="username" name="username" placeholder="User Name" class="input">
                     </div>
 
+
                     <div class="field input-field">
                         <input type="email" name="email" placeholder="Email" class="input">
                     </div>
-
+                     
+                    <div class="field input-field">
+                        <input type="bio" name="bio" placeholder="Bio" class="input">
+                    </div>
                     <div class="field input-field">
                         <input type="password" name="password1" placeholder="Create password" class="password">
                     </div>
@@ -106,9 +111,9 @@
             <div class="line"></div>
 
             <div class="media-options">
-                <a href="#" class="field google">
+                <a href="{% provider_login_url 'google' %}" class="field google">
                     <img src="{% static 'images/google.png'%}" alt="" class="google-img">
-                    <span>Login with Google</span>
+                    <span>SignUp with Google</span>
                 </a>
             </div>
 

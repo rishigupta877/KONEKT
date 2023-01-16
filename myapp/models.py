@@ -10,8 +10,9 @@ class User(AbstractUser):
     name=models.CharField(max_length=200,null=True,blank=True)
     email=models.EmailField(unique=True)
     bio=models.TextField(null=True,blank=True)
-    #avatar=models.ImageField()
-    
+    avatar=models.ImageField(upload_to='images',null=True,default='avatar.svg')
+    followers=models.ManyToManyField('self',symmetrical=False,related_name='follower',blank=True)
+    followings=models.ManyToManyField('self',symmetrical=False,related_name='following',blank=True)
     USERNAME_FIELD='email'
     object = UserManager()
     REQUIRED_FIELDS=[]
@@ -21,10 +22,9 @@ class User(AbstractUser):
         return str(self.email)
     
 
-class Userfriends(models.Model):
-    followers=models.ForeignKey(User,on_delete=models.CASCADE,related_name='followes')
-    following=models.ForeignKey(User,on_delete=models.CASCADE,related_name='following')
-
+class Friend_request(models.Model):
+    from_user=models.ForeignKey(User,related_name='from_user',on_delete=models.CASCADE)
+    to_user=models.ForeignKey(User,related_name='to_user',on_delete=models.CASCADE)
 
 
 class Posts(models.Model):
@@ -36,6 +36,7 @@ class Posts(models.Model):
    content=models.TextField(null=True,blank=True)
    likecount=models.IntegerField(default=0)
    dislikecount=models.IntegerField(default=0)
+   group_id=models.IntegerField(default=0)
    def save(self, *args, **kwargs):
         ''' On save, update timestamps '''
         if not self.id:
@@ -66,6 +67,7 @@ class comment(models.Model):
      comment_edited=models.DateTimeField(auto_now_add=True)
      postId=models.ForeignKey(Posts,on_delete=models.CASCADE)
      userId=models.ForeignKey(User,on_delete=models.SET_NULL,null=True)
+     text=models.TextField();
 
 
 
@@ -76,6 +78,37 @@ class room(models.Model):
    postid=models.ForeignKey(Posts,on_delete=models.SET_NULL,null=True)
 
          
+
+class Group(models.Model):
+    admin=models.ForeignKey(User,on_delete=models.SET_NULL,null=True)
+ 
+    name=models.CharField(max_length=200)
+    avatar=models.ImageField(upload_to='images',null=True,blank=True,default='th.jpeg')
+    description=models.TextField(null=True,blank=True)
+    participants=models.ManyToManyField(User,related_name='Participants',symmetrical=False,blank=True)
+    postId=models.ManyToManyField(Posts,symmetrical=False ,blank=True)
+    updated=models.DateTimeField(auto_now=True)
+    created=models.DateTimeField(auto_now_add=True)
+    is_public=models.BooleanField(default=False)
+
+    class Meta:
+        ordering=['-updated','-created']
+
+    def __str__(self):
+        return str(self.name)
+
+
+
+class joingroup(models.Model):
+   message=models.TextField(null=True); 
+   from_user=models.ForeignKey(User,on_delete=models.CASCADE)
+   to_group=models.ForeignKey(Group,on_delete=models.CASCADE)
+    
+   
+
+
+
+
 
 
 

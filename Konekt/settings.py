@@ -40,6 +40,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'myapp.apps.MyappConfig',
     'accounts.apps.AccountsConfig',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+
 ]
 
 MIDDLEWARE = [
@@ -151,8 +157,43 @@ CORS_ALLOW_ALL_ORIGINS=True
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'  
 MAILER_EMAIL_BACKEND = EMAIL_BACKEND  
 EMAIL_HOST = 'smtp.gmail.com'  
-EMAIL_HOST_PASSWORD = 'sllugonkftglryrs'  
+EMAIL_HOST_PASSWORD = 'tviabiklfrdlpdbu'  
 EMAIL_HOST_USER = 'zgddht@gmail.com'  
 EMAIL_PORT = 465  
 EMAIL_USE_SSL = True  
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+
+
+AUTHENTICATION_BACKENDS=[
+
+
+
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend'
+]
+
+SITE_ID = 5
+
+
+LOGIN_REDIRECT_URL='/'
+ACCOUNT_LOGOUT_REDIRECT_URL='login'
+
+SOCIALACCOUNT_PROVIDERS={
+
+    'google':{
+      
+        'SCOPE':[
+
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS':{
+
+            'access_type':'online',
+        }
+    }
+}
+
+
+

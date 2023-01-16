@@ -25,7 +25,11 @@
     <section class="container forms">
         <div class="form login">
             <div class="form-content">
+                {% if post %}
+                <header>Edit Post</header>
+                {% else %}
                 <header>New Post</header>
+                {% endif %}
                 <form action=""  method="post" enctype="multipart/form-data">
                      {% csrf_token %}
                     <div class="field input-field">
@@ -33,24 +37,32 @@
                             <label for="file" style="cursor: pointer">Upload</label>
                             <span class="material-symbols-outlined"> upload </span>
                         </p>
-                        <input type="file" accept="image/gif, image/jpeg, image/png" name="image" id="file"
-                            onchange="loadFile(event)" style="display: none" />
+                        <input type="file" accept="image/gif, image/jpeg, image/png"  id="file"
+                        onchange="loadFile(event)"  style="display: none"  name="image"  />
 
                     </div>
-                    <img id="output" width="100%" />
+                  
+                    <img id="output" src="{{post.img.url}}" width="100%" />
+                
                     <div class="field input-field">
-                        <input  name="tags" type="tags" placeholder="Tags" class="input" />
+                        <input  name="tags" type="tags" placeholder="Tags" class="input" value="{{post.tags}}" />
 
                     </div>
 
                     <div class="field input-field">
-                        <input  name="content" type="desc" placeholder="Description" class="input" />
+                        <input  name="content" type="desc" placeholder="Description" class="input" value="{{post.content}}" />
                     </div>
                 
-
-                    <div class="field button-field" >
-                        <button type="submit">Create Post</button>
+              {% if post %}
+                     <div class="field button-field" >
+                        <button type="submit">Edit Post</button>
                     </div>
+
+                {% else %}
+                <div class="field button-field" >
+                    <button type="submit">Create Post</button>
+                </div>
+                {% endif %}
                 </form>
             </div>
         </div>

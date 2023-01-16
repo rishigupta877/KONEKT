@@ -1,0 +1,91 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+   {% include 'allcss.html' %}
+</head>
+<body>
+   
+    <!-- <div class="main__body">
+      
+        
+        <div class="sidebar">
+        <h2>Groups</h2>
+        {% for group in groups %}     
+            <div style="margin:20px" class="sidebarRow">
+                    <img  style="width:100px"class="user__avatar" src="{{group.avatar.url}}" alt="">
+                    
+            </div>
+          
+        {% endfor %}    
+           
+        </div>
+       
+    </div> -->
+   
+  <div class="main__body">
+    <div class="feed">
+        <div style="width:50% ; text-align:center; height:50px ;padding:4px"class="post"> <h2>Groups</h2></div>
+    {% for group in groups %} 
+
+    <div  style="width:50%"class="post">
+    <div  class="post__top">
+        <img style="width:100px; height:100px; "class="user__avatar post__avatar "
+           src="{{group.avatar.url}}"
+            alt="" />
+
+      
+
+        <div  style="margin-left:20px"class="post__topInfo">
+            
+    
+               <a href="{% url 'groupdashboard' group.id %}" class="anchor"> <h2>{{group.name}}</h2></a>
+            
+           
+            
+
+          <p>{{group.created | timesince}}</p>
+        </div>
+
+        <span style="margin:auto;" class="post__topInfo">
+
+           {% if request.user == group.admin %}
+           <a href="{% url 'deletegroup' group.id %}" type="Button" class="anchor" style="color:grey;" title="deleteGroup"> <span class="material-icons"> delete</span> </a>
+         
+          {% endif %}
+          {% if request.user in group.participants.all %}
+
+          <a href="{% url 'leavegroup' group.id %}" type="Button" class="anchor" style="color:grey;" title="leaveGroup"> <span class="material-icons"> logout </span> </a>
+          {% endif %}
+
+
+
+
+        </span>
+      
+    </div>
+
+</div>
+
+    {% endfor %}
+  
+</div>
+</div>
+  
+
+
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v10.0"
+     nonce="zUxEq08J"></script>
+  
+    
+
+
+
+
+</body>
+</html>

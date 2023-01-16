@@ -1,0 +1,58 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% include 'allcss.html ' %}
+</head>
+<body>
+    
+    
+    <div class="main__body">
+     <div class="feed">
+    <div style="width:50% ; text-align:center; height:50px ;padding:4px"class="post"> <h2>Followers</h2></div>
+    {% for follower in followerss.all  %} 
+
+    <div  style="width:50%"class="post">
+    <div  class="post__top">
+        <img style="width:80px; height:80px;" class="user__avatar post__avatar"
+           src="{{follower.avatar.url}}"
+            alt="" />
+
+      
+
+        <div  style="margin-left:20px"class="post__topInfo">
+            
+    
+               <a href="{% url 'dashboard' follower.id %}" class="anchor"> <h2>{{follower.username}}</h2></a>
+            
+           
+            
+
+          
+        </div>
+        {% if follower not in request.user.followings.all %}
+        <div  style="margin-left:15px"class="post__topInfo">
+              
+            <a href="{% url 'send_request' follower.id %}" type="button" class="anchor" style="color: gray;" title="follow"><span class="material-icons">personadd</span></a>
+
+        </div>
+        {% endif %}
+      
+    </div>
+
+</div>
+
+    {% endfor %}
+  
+</div>  
+</div> 
+
+
+
+</body>
+</html>

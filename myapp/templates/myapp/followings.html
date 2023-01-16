@@ -1,0 +1,63 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% include 'allcss.html' %}
+</head>
+<body>
+    
+    <!-- {% for following in followingss.all %}
+
+   <div>
+    <div>{{following.username}}</div>
+   </div>
+    {% endfor %} -->
+
+
+
+    <div class="main__body">
+    <div class="feed">
+        <div style="width:50% ; text-align:center; height:50px ;padding:4px"class="post"> <h2>Followings</h2></div>
+        {% for following in followingss.all  %} 
+    
+        <div  style="width:50%"class="post">
+        <div  class="post__top">
+            <img  style="height:80px; width:80px"class="user__avatar post__avatar"
+               src="{{following.avatar.url}}"
+                alt="" />
+    
+          
+    
+            <div  style="margin-left:20px"class="post__topInfo">
+                
+        
+                   <a href="{% url 'dashboard' following.id %}" class="anchor"> <h2>{{following.username}}</h2></a>
+                
+               
+                
+    
+              
+            </div>
+
+            <div  style="margin-left:15px"class="post__topInfo">
+              
+                <a href="{% url 'unfollow' following.id %}" type="button" class="anchor" style="color: gray;" title="unfollow"><span class="material-icons">personremove</span></a>
+
+            </div>
+          
+        </div>
+    
+    </div>
+    
+        {% endfor %}
+      
+    </div> 
+       
+</div> 
+</body>
+</html>

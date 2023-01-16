@@ -1,0 +1,123 @@
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KONEKT</title>
+    <link rel="stylesheet" href="{% static 'css/Dashboard.css' %}" />
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" /> -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+</head>
+
+<body>
+    <!-- header starts -->
+    <div class="header">
+        <!-- <div class="header__input">
+            <span class="material-icons"> search </span>
+            <input type="text" placeholder="Search Facebook" />
+        </div> -->
+        <div class="header__left">
+            <h2 class="header-text">KONEKT</h2>
+        </div>
+
+        <!-- <div class="header__middle">
+            <div class="header__input">
+                <span class="material-icons"> search </span>
+                <input type="btn btn-outline my-sm-0 header__input" placeholder="Search" />
+            </div>
+
+        </div> -->
+
+        {% include 'filter.html' %}
+
+        <i class="bi bi-bell-fill"></i>
+
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bell-fill" viewBox="0 0 16 16">
+            <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
+          </svg>
+        <div class="header__right">
+            <!-- <div class="header__input">
+                 <span class="material-icons"> search </span>
+                <input type="btn btn-outline my-sm-0 header__input" placeholder="Search" /> 
+        </div> -->
+
+        </div>
+    </div>
+    <!-- header ends -->
+
+    <!-- main body starts -->
+    <div class="main__body">
+        <!-- sidebar starts -->
+        <div class="sidebar">
+            <div class="sidebarRow">
+                <img  style="width:250px ; height:200px;" class="profile__avatar"
+                   src="{{group.avatar.url}}"
+                    alt="" />
+            </div>
+            <div class="sidebarRow ">
+                <h4>{{group.name}}</h4>
+            </div>
+              
+            <div class="sidebarRow ">
+                <h4>description: {{group.description}}</h4>
+            </div>
+        
+          
+           
+
+            <div class="sidebarRow">
+               <h4> Admin: <a href="{% url 'dashboard' group.admin.id %}" class="anchor"> {{group.admin.username}} </a></h4>
+              </div>
+         
+    
+          {% if request.user == group.admin or request.user in group.participants.all %} 
+            <div class="sidebarRow">
+                
+                <a href="{% url 'grouppost' group.id request.user.id %}" style="text-decoration: none;"><button type="" class="btn">Add Post</button></a>
+                
+            </div>
+
+            
+          {% endif %}
+           
+        
+        </div>
+       
+        <!-- sidebar ends -->
+
+        <!-- feed starts -->
+        <div class="feed">
+        <!-- post starts -->
+            {% for post in group.postId.all %} 
+             {% if post.userId %}
+            <div class="post">
+                 
+               
+                {% include 'postmaterial.html' %}
+                {% include 'like_dislike.html' %}
+            </div>
+        
+            
+            {% endif %}
+            {% endfor %}
+            <!-- posts end -->
+        </div>
+       <!-- feed end -->
+
+
+
+
+    <!-- left side bar starts -->
+    {% include 'sidebar.html' %}
+    </div>
+    <!-- left side bar end -->
+    <!-- main body ends -->
+
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v10.0"
+        nonce="zUxEq08J"></script>
+</body>
+
+</html>

@@ -1,0 +1,76 @@
+
+{% if group %}
+<div style="flex: 0.33" class="widgets">
+    
+
+    <div class="widget__top">
+        <h2>participants</h2>
+    </div>
+    {% for participant in participants %}
+   
+    
+ 
+    <div class="widget__top">
+        <img class="user__avatar post_avatar"
+           src="{{participant.avatar.url}}"
+            alt="" />
+        <div class="widget__topInfo">
+            <h3> <a href="{% url 'dashboard' participant.id %}" class="anchor">{% if participant == request.user %} You {% else %}{{participant.username}} {% endif %} </a>{% if request.user != participant and participant not in request.user.followings.all %}<a href="{% url 'send_request' participant.id %}">Follow</a> {% endif %}</h3>
+             
+        </div>
+    </div>
+    
+    {% endfor%}
+
+</div>
+{% else %}
+<div style="flex: 0.33" class="widgets">
+    <div class="widget__top">
+        <h2>Groups</h2>
+    </div>
+    {% for group in groups %}
+    <div class="widget__top">
+        <img class="user__avatar post_avatar"
+         src="{{ group.avatar.url }}"
+            alt="" />
+        <div class="widget__topInfo">
+            <h3><a href="{% url 'groupdashboard' group.id %}" class="anchor">{{group.name}}</a></h3>
+            <p>{{group.description}}</p>
+        </div>
+        <div class="widget__topInfo">
+        <a href="{% url 'joinGroup' group.id %}" class="anchor" style="color:gray; padding-left:4px" title="Join"> <span class="material-icons">groupadd</span></a>
+
+    </div>
+    </div>
+   
+    {% endfor %}
+    <div class="widget__top">
+        <span class="material-icons">
+            expand_more
+            </span>   
+    <a href="{% url 'Allgroups' %}"class="anchor"><h3>More</h3></a>
+    </div>
+    <div class="widget__top">
+        <h2>People to follow</h2>
+    </div>
+    {% for usera in users %}
+   
+    
+    {% if  usera != request.user and usera not in  request.user.followings.all %}
+     
+    <div class="widget__top">
+        <img class="user__avatar post_avatar"
+           src="{{usera.avatar.url}}"
+            alt="" />
+        <div class="widget__topInfo">
+            <h3><a href="{% url  'dashboard'  usera.id %}" class="anchor">{{usera.username}} </a><a href="{% url 'send_request' usera.id %}" >Follow</a></h3>
+             
+        </div>
+    </div>
+    {% endif %}
+    {% endfor%}
+
+</div>
+
+
+{% endif %}

@@ -1,0 +1,97 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% include 'allcss.html' %}
+</head>
+<body>
+    
+
+
+    <!-- {% for req in requests %}
+
+
+   <div>
+    <div>{{req.from_user.username}} sent you friend request<a href="{% url 'accept_request' req.id %}">Accept</a></div>
+   </div>
+
+    {% endfor %}
+
+
+    {% for requestgroup in requestGroups %}
+    
+      <div>{{requestgroup.from_user.username}} request to join the group      {{requestgroup.to_group}}  <a href="{% url 'Approvejoining' requestgroup.from_user.id requestgroup.to_group.id %}">Approve</a> </div>
+
+    {% endfor %} -->
+
+
+
+<div class="main__body">
+    <div class="feed">
+      <div style="width:50% ; text-align:center; height:50px ;padding:4px"class="post"> <h2>All Notification</h2></div>
+      {% for req in requests %} 
+  
+      <div  style="width:50%"class="post">
+      <div  class="post__top">
+          <img style="width:100px"class="user__avatar post__avatar"
+             src="{{req.from_user.avatar.url}}"
+              alt="" />
+  
+        
+  
+          <div  style="margin-left:20px"class="post__topInfo">
+              
+      
+                 <a href="{% url 'dashboard' req.from_user.id %}" class="anchor"> <h2>{{req.from_user.username}}</h2></a>
+              </a>
+             <br>
+               <p> <h4>Sent you a friend request           <a href="{% url 'accept_request' req.id %}">Accept</a> </h4></p>
+    
+            
+          </div>
+        
+      </div>
+  
+  </div>
+  
+      {% endfor %}
+
+
+
+      {% for requestgroup in requestGroups %}
+      <div  style="width:50%"class="post">
+      <div  class="post__top">
+        <img style="width:100px"class="user__avatar post__avatar"
+           src="{{requestgroup.from_user.avatar.url}}"
+            alt="" />
+
+      
+
+        <div  style="margin-left:20px"class="post__topInfo">
+            
+    
+               <a href="{% url 'dashboard' requestgroup.from_user.id %}" class="anchor"> <h2>{{requestgroup.from_user.username}}</h2></a>
+            </a>
+           <br>
+            <p> <h4>Wants to join the Group  <span style="padding:4px "> <u>{{requestgroup.to_group}} </span>  </u><a href="{% url 'Approvejoining' requestgroup.from_user.id requestgroup.to_group.id %}">Approve</a> </h4></p>
+
+            <div>Reason: {{requestgroup.message}}</div>
+  
+          
+        </div>
+      
+    </div> 
+    </div>
+      {% endfor %}
+    
+  </div> 
+  
+</div>
+
+</body>
+</html>

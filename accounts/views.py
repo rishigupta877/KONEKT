@@ -30,6 +30,7 @@ def registerUser(request):
         email=request.POST['email']
         password1=request.POST['password1']
         password2=request.POST['password2']
+        bio=request.POST['bio']
         if password1 == password2:
             if User.objects.filter(username=username,email=email).exists():
                     user=User.objects.get(username=username,email=email)
@@ -50,7 +51,7 @@ def registerUser(request):
                     messages.error(request,'email taken')     
                
             else :
-                user=User.objects.create_user(username=username,password=password1,email=email)
+                user=User.objects.create_user(username=username,password=password1,email=email,bio=bio)
                 user.is_active= False
                 user.save()
                 current_site=get_current_site(request)
