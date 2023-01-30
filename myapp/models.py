@@ -3,6 +3,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from .manage import UserManager
 from django.utils import timezone
+from cloudinary.models import CloudinaryField
 # Create your models here.
 
 class User(AbstractUser):
@@ -10,7 +11,7 @@ class User(AbstractUser):
     name=models.CharField(max_length=200,null=True,blank=True)
     email=models.EmailField(unique=True)
     bio=models.TextField(null=True,blank=True)
-    avatar=models.ImageField(upload_to='images',null=True,default='avatar.svg')
+    avatar=CloudinaryField('images',null=True,default='avatar.svg')
     followers=models.ManyToManyField('self',symmetrical=False,related_name='follower',blank=True)
     followings=models.ManyToManyField('self',symmetrical=False,related_name='following',blank=True)
     USERNAME_FIELD='email'
@@ -32,7 +33,7 @@ class Posts(models.Model):
    edited=models.DateTimeField()
    tags=models.TextField(null=True,blank=True)
    userId=models.ForeignKey(User,on_delete=models.CASCADE)
-   img=models.ImageField(upload_to='images',null=True,blank=True)
+   img=CloudinaryField('images',null=True,blank=True)
    content=models.TextField(null=True,blank=True)
    likecount=models.IntegerField(default=0)
    dislikecount=models.IntegerField(default=0)
@@ -83,7 +84,7 @@ class Group(models.Model):
     admin=models.ForeignKey(User,on_delete=models.SET_NULL,null=True)
  
     name=models.CharField(max_length=200)
-    avatar=models.ImageField(upload_to='images',null=True,blank=True,default='th.jpeg')
+    avatar=CloudinaryField('images',null=True,blank=True,default='th.jpeg')
     description=models.TextField(null=True,blank=True)
     participants=models.ManyToManyField(User,related_name='Participants',symmetrical=False,blank=True)
     postId=models.ManyToManyField(Posts,symmetrical=False ,blank=True)

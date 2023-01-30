@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 import os
 from pathlib import Path
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -32,6 +35,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'channels',
    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,10 +45,12 @@ INSTALLED_APPS = [
     'myapp.apps.MyappConfig',
     'accounts.apps.AccountsConfig',
     'django.contrib.sites',
+    'chat',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+    'crispy_forms',
 
 ]
 
@@ -84,6 +90,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'Konekt.wsgi.application'
+ASGI_APPLICATION = 'Konekt.asgi.application'
 
 
 # Database
@@ -101,6 +108,7 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
 
 
 # Password validation
@@ -127,7 +135,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kolkata'
 
 USE_I18N = True
 
@@ -152,7 +160,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOW_ALL_ORIGINS=True
 
 
-
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer',
+        
+    }
+}
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'  
 MAILER_EMAIL_BACKEND = EMAIL_BACKEND  
@@ -194,6 +207,16 @@ SOCIALACCOUNT_PROVIDERS={
         }
     }
 }
+
+
+
+cloudinary.config( 
+  cloud_name = "dwdaf7yjq",
+  api_key = "733554284446718", 
+  api_secret ="85otp0srLMgfzF8gCkal8JGK-y4",
+  secure = True
+)
+
 
 
 

@@ -27,7 +27,7 @@
         </div> -->
        
         <div   class="header__left">
-            <h2 class="header-text">KONEKT</h2>
+           <a href="/" class="anchor"><h2 class="header-text">KONEKT</h2> </a> 
         </div> 
       {% include 'filter.html' %}
 
@@ -40,8 +40,28 @@
                <a href="{% url 'Notification' user.id %}">        <span class="material-icons" >notifications </span></a>
         </div>
 
+        <div class="header__input">
+
+            <a href="chat/">
+            <span class="material-icons" >chat </span>
+
+            </a>
+        </div>
+
         </div>
        {% endif %} 
+
+
+      
+
+        
+           
+           
+             
+       
+
+        
+
 
 
        
@@ -97,11 +117,10 @@
             {% if post.userId %} 
 
             {% if post.userId == request.user or post.userId in request.user.followings.all or post.userId in request.user.followers.all %}
-            <div class="post">
-              
-                {% include 'postmaterial.html' %}
-                {% include 'like_dislike.html' %}
-            </div>
+
+            {% include 'postmaterial.html' %}
+           
+            
             {% endif %}
             {% endif %}
          {% endfor %}    

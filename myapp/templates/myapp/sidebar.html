@@ -63,7 +63,11 @@
            src="{{usera.avatar.url}}"
             alt="" />
         <div class="widget__topInfo">
-            <h3><a href="{% url  'dashboard'  usera.id %}" class="anchor">{{usera.username}} </a><a href="{% url 'send_request' usera.id %}" >Follow</a></h3>
+            <h3><a href="{% url  'dashboard'  usera.id %}" class="anchor">{{usera.username}} </a><a href="{% url 'send_request' usera.id %}"  >  
+                Follow</a>
+                 <!-- <svg width="221" height="124" viewBox="0 0 221 124" fill="none" xmlns="http://www.w3.org/2000/svg">
+                 </svg> -->
+             </h3>
              
         </div>
     </div>

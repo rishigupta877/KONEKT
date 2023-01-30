@@ -1,0 +1,137 @@
+{% load socialaccount %}
+{% load static %}
+
+<!DOCTYPE html>
+<!-- Coding by CodingLab | www.codinglabweb.com-->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> KONEKT </title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <!-- Boxicons CSS -->
+    <link href=' https://unpkg.com/boxicons@2.1.2/css/?boxicons.min.css' rel='stylesheet'>
+    
+</head>
+
+<body>
+    <div class="d-inline-block align-text-top logo-design">
+       <a href="/" class="anchor"> <h4 class="heading-text">KONEKT</h4></a>
+        <!-- <svg width="221" height="124" viewBox="0 0 221 124" fill="none" xmlns="http://www.w3.org/2000/svg">
+        </svg> -->
+    </div>
+    <section class="container forms">
+        
+    
+
+        <div class="form login">
+
+              {% include 'messages.html'  %}
+           
+           
+            <div class="form-content">
+                <header>Login</header>
+                <form action="accounts/login" method="POST">
+
+                    {% csrf_token %}
+                    <div class="field input-field">
+                        <input type="email"name="email" placeholder="Email" class="input">
+                    </div>
+
+                    <div class="field input-field">
+                        <input type="password" name="password" placeholder="Password" class="password">
+                        <i class='bx bx-hide eye-icon'></i>
+                    </div>
+
+                    <div class="form-link">
+                        <a href="accounts/password_reset" class="forgot-pass">Forgot password?</a>
+                    </div>
+
+                    <div class="field button-field">
+                        <button type="submit">Login</button>
+                    </div>
+                </form>
+
+                <div class="form-link">
+                    <span>Don't have an account? <a href="{% url 'register' %}" class="link signup-link">Signup</a></span>
+                </div>
+            </div>
+
+            <div class="line"></div>
+
+
+            <div class="media-options">
+               
+                <a href="{% provider_login_url 'google' %}" class="field google">
+                <!-- <a href="https://accounts.google.com/o/oauth2/auth/oauthchooseaccount?client_id=1082666741569-unsm23hvic9i8prj305kq36pgv4nkb9d.apps.googleusercontent.com&redirect_uri=http%3A%2F%2F127.0.0.1%3A8000%2Faccounts%2Fgoogle%2Flogin%2Fcallback%2F&scope=email%20profile&response_type=code&state=2kymGDPWRAW4&access_type=online&service=lso&o2v=1&flowName=GeneralOAuthFlow" class="field google"> -->
+                    <img src="{% static 'images/google.png'%}" alt="" class="google-img">
+                    <span>Login with Google</span>
+                </a>
+            </div>
+
+        </div>
+        
+        <!-- Signup Form -->
+
+        <div class="form signup">
+            <div class="form-content">
+                <header>Signup</header>
+                <form action="accounts/register" method="post">
+
+                    {% csrf_token %}
+                    <div class="field input-field">
+                        <input type="username" name="username" placeholder="User Name" class="input">
+                    </div>
+
+
+                    <div class="field input-field">
+                        <input type="email" name="email" placeholder="Email" class="input">
+                    </div>
+                     
+                    <div class="field input-field">
+                        <input type="bio" name="bio" placeholder="Bio" class="input">
+                    </div>
+                    <div class="field input-field">
+                        <input type="password" name="password1" placeholder="Create password" class="password">
+                    </div>
+
+                    <div class="field input-field">
+                        <input type="password" name="password2" placeholder="Confirm password" class="password">
+                        <i class='bx bx-hide eye-icon'></i>
+                    </div>
+
+                    <div class="field button-field">
+                        <button type="submit">Signup</button>
+                    </div>
+                </form>
+
+                <div class="form-link">
+                    <span>Already have an account? <a href="{% url 'login' %}" class="link login-link">Login</a></span>
+                </div>
+            </div>
+
+            <div class="line"></div>
+
+            <div class="media-options">
+               
+                 
+
+                <a href="{% provider_login_url 'google' %}" class="field google">
+                    <img src="{% static 'images/google.png'%}" alt="" class="google-img">
+                    <span>SignUp with Google</span>
+                </a>
+            </div>
+
+        </div>
+    </section>
+     
+    <!-- JavaScript -->
+    <script src="{% static 'js/script.js'%}"></script>
+</body>
+
+</html>

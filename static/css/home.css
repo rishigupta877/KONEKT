@@ -45,7 +45,7 @@
       text-align: center;
     color: #ffffff;
     /*Primary/Primary*/
-    background: #0171d3;
+    background: #2e81f4;
     /*OurShadow*/
     /* box-shadow: 0px 4px 61px rgba(0, 160, 176, 0.4); */
     border-radius: 4px;
@@ -200,16 +200,18 @@
   /* post */
   
   .post {
-    width: 100%;
+    width: 80%;
+    
     margin-top: 15px;
     border-radius: 15px;
     background-color: white;
     box-shadow: 0px 5px 7px -7px rgba(0, 0, 0, 0.75);
   }
   
-  .post__image img {
+  .post__image img{
     display: flex;
     width: 100%;
+    height: auto;
   }
   
   .post__top {

@@ -7,7 +7,8 @@ from .models import Posts,Like,comment,User,Dislike,Friend_request,Group,joingro
 from django.db.models import Q
 import re
 from django.urls import reverse
-from django.http import HttpResponse
+from django.http import HttpResponse,HttpResponseRedirect
+from chat.models import Thread
 # Create your views here.
 
 
@@ -57,7 +58,7 @@ def home(request):
         return render(request,'home.html',context)
     else :
         context={'page':login}
-        return render(request,'accounts/Login_SignUp.html',context)
+        return render(request,'accounts/login.html',context)
 
 
 
@@ -290,8 +291,15 @@ def accept_friend_request(request,requestID):
     if friend_request.to_user == request.user:
         friend_request.to_user.followers.add(friend_request.from_user)
         friend_request.from_user.followings.add(friend_request.to_user)
+        list = [friend_request.from_user.id,friend_request.to_user.id]
+        list.sort()
+        first_person=User.objects.get(id=list[0])
+        second_person=User.object.get(id=list[1])
+        
+        thread = Thread.objects.get_or_create(first_person=first_person,second_person=second_person)
         friend_request.delete()
-        return HttpResponse('friend request accepted')
+        messages.success(request,'friend request aceepted')
+        return redirect('Notification',request.user.id)
 
     else :
 
@@ -335,13 +343,21 @@ def followings(request,userId):
 def unfollow(request,userId):
 
     user=request.user
-    from_user=User.objects.get(id=userId)
+    to_user=User.objects.get(id=userId)
 
-    a=user.followings.remove(from_user)
+    a=user.followings.remove(to_user)
 
     
-    b=from_user.followers.remove(user)
- 
+    b=to_user.followers.remove(user)
+    list = [user.id,to_user.id]
+    list.sort()
+    first_person=User.objects.get(id=list[0])
+    second_person=User.object.get(id=list[1])
+        
+    thread = Thread.objects.filter(first_person=first_person,second_person=second_person)
+   
+    
+    thread.delete()
 
     return redirect('home')
 
