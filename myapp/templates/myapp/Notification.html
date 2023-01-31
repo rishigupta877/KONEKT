@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Notification</title>
     {% include 'allcss.html' %}
 </head>
 <body>
@@ -50,8 +50,9 @@
                  <a href="{% url 'dashboard' req.from_user.id %}" class="anchor"> <h2>{{req.from_user.username}}</h2></a>
               </a>
              <br>
-               <p> <h4>Sent you a friend request           <a href="{% url 'accept_request' req.id %}">Accept</a> </h4></p>
-    
+               <p> <h4>Sent you a friend request           
+                <!-- <a href="{% url 'accept_request' req.id %}">Accept</a> </h4></p> -->
+                <a href="{% url 'accept_request' req.id %}" style="text-decoration: none;"><button type="" class="accept">Accept</button></a>
             
           </div>
         

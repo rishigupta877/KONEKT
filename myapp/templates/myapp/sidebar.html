@@ -1,6 +1,6 @@
 
 {% if group %}
-<div style="flex: 0.33" class="widgets">
+<div style="flex: 0.33" class="widgets ">
     
 
     <div class="widget__top">
@@ -15,7 +15,10 @@
            src="{{participant.avatar.url}}"
             alt="" />
         <div class="widget__topInfo">
-            <h3> <a href="{% url 'dashboard' participant.id %}" class="anchor">{% if participant == request.user %} You {% else %}{{participant.username}} {% endif %} </a>{% if request.user != participant and participant not in request.user.followings.all %}<a href="{% url 'send_request' participant.id %}">Follow</a> {% endif %}</h3>
+            <h3> <a href="{% url 'dashboard' participant.id %}" class="anchor">{% if participant == request.user %} You {% else %}{{participant.username}} {% endif %} </a>{% if request.user != participant and participant not in request.user.followings.all %}
+                <a href="{% url 'send_request' participant.id %}">Follow</a>
+                
+                 {% endif %}</h3>
              
         </div>
     </div>
@@ -24,7 +27,7 @@
 
 </div>
 {% else %}
-<div style="flex: 0.33" class="widgets">
+<div style="flex: 0.33" class="widgets ">
     <div class="widget__top">
         <h2>Groups</h2>
     </div>
@@ -63,8 +66,11 @@
            src="{{usera.avatar.url}}"
             alt="" />
         <div class="widget__topInfo">
-            <h3><a href="{% url  'dashboard'  usera.id %}" class="anchor">{{usera.username}} </a><a href="{% url 'send_request' usera.id %}"  >  
-                Follow</a>
+            <h3><a href="{% url  'dashboard'  usera.id %}" class="anchor">{{usera.username}} </a>
+                <!-- <a href="{% url 'send_request' usera.id %}"  >  
+                Follow</a> -->
+                <a href="{% url 'send_request' usera.id %}" style="text-decoration: none;"><button type="" class="follow">Follow</button></a>
+        
                  <!-- <svg width="221" height="124" viewBox="0 0 221 124" fill="none" xmlns="http://www.w3.org/2000/svg">
                  </svg> -->
              </h3>
