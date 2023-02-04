@@ -59,7 +59,10 @@
             </a>
            
 
-            <h3><a href="{% url 'joinGroup' group.id %}" >Join</a></h3>
+            <h3>
+                <!-- <a href="{% url 'joinGroup' group.id %}" >Join</a> -->
+                <a href="{% url 'joinGroup' group.id %}" style="text-decoration: none;"><button type="" class="accept">Join</button></a>
+            </h3>
             
 
           <p>{{group.created | timesince}}</p>

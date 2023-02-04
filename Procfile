@@ -1,0 +1,1 @@
+web: gunicorn Konekt.wsgi --log-file -

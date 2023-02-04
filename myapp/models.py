@@ -81,7 +81,7 @@ class room(models.Model):
          
 
 class Group(models.Model):
-    admin=models.ForeignKey(User,on_delete=models.SET_NULL,null=True)
+    admin=models.ForeignKey(User,on_delete=models.CASCADE,null=True)
  
     name=models.CharField(max_length=200)
     avatar=CloudinaryField('images',null=True,blank=True,default='th.jpeg')
