@@ -221,4 +221,3 @@ cloudinary.config(
 
 
 
-CSRF_TRUSTED_ORIGINS =['https://rishigupta877-fluffy-capybara-pjrjv69p5qh755w-8000.preview.app.github.dev']
