@@ -10,24 +10,30 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
+
+
 import os
 from pathlib import Path
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
 
+from decouple import config
+
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-33*^o(o4az*#*io$1g0^tn#!(ef(=me0if7$%)&_f)4$qrhpt8'
+SECRET_KEY= config('SECRET_KEY')
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG',cast=bool)
 
 ALLOWED_HOSTS = ['*']
 
@@ -99,12 +105,7 @@ ASGI_APPLICATION = 'Konekt.asgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        # 'NAME': 'KONEKT',
-        # 'USER':'postgres',
-        # 'PASSWORD':'1234',
-        # "HOST":'localhost',
-        # 'PORT':'5432',
-        #   'ENGINE': 'django.db.backends.sqlite3',
+      
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
@@ -171,9 +172,9 @@ CHANNEL_LAYERS = {
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'  
 MAILER_EMAIL_BACKEND = EMAIL_BACKEND  
 EMAIL_HOST = 'smtp.gmail.com'  
-EMAIL_HOST_PASSWORD = 'tviabiklfrdlpdbu'  
-EMAIL_HOST_USER = 'zgddht@gmail.com'  
-EMAIL_PORT = 465  
+EMAIL_HOST_PASSWORD=config('EMAIL_HOST_PASSWORD')  
+EMAIL_HOST_USER=config('EMAIL_HOST_USER')  
+EMAIL_PORT = config('EMAIL_PORT') 
 EMAIL_USE_SSL = True  
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
@@ -187,7 +188,7 @@ AUTHENTICATION_BACKENDS=[
     'allauth.account.auth_backends.AuthenticationBackend'
 ]
 
-SITE_ID = 5
+SITE_ID =config('SITE_ID',cast=int)
 
 
 LOGIN_REDIRECT_URL='/'
@@ -212,9 +213,9 @@ SOCIALACCOUNT_PROVIDERS={
 
 
 cloudinary.config( 
-  cloud_name = "dwdaf7yjq",
-  api_key = "733554284446718", 
-  api_secret ="85otp0srLMgfzF8gCkal8JGK-y4",
+  cloud_name=config('cloud_name'),
+  api_key = config('api_key'), 
+  api_secret=config('api_secret'),
   secure = True
 )
 
